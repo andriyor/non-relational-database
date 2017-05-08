@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+    <form method="POST" action="/add_invoice">
+        <div class="form-group">
+            <label for="sel1">Оберіть контейнер</label>
+            <select class="form-control" id="sel1" name="container_id">
+                {%- for container in containers %}
+                    <option value={{ container.id }}>{{ container.product_description }}</option>
+                {%- endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Оберіть рейс</label>
+            <select class="form-control" id="sel1" name="flight_id">
+                {%- for flight in flights %}
+                    <option value={{ flight.id }}>{{ loop.index }}</option>
+                {%- endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Оберіть вантажоодержувача</label>
+            <select class="form-control" id="sel1" name="consignee_id">
+                {%- for consignee in consignees %}
+                    <option value={{ consignee.id }}>{{ consignee.consignee_name }}</option>
+                {%- endfor %}
+            </select>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+
+{% endblock %}
