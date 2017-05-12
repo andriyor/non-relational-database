@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <hr>
+    <h3>Update ship</h3>
+    <form action="" method="post" class="form" role="form">
+        {{ form.csrf_token }}
+        {{ wtf.form_field(form.name, value=ship.name) }}
+        {{ wtf.form_field(form.type, value=ship.type) }}
+        {{ wtf.form_field(form.submit) }}
+    </form>
+{% endblock %}
+

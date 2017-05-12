@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% from "_render_field.html" import render_field, render_radio_fields %}
 
 {% block page_content %}
-
+    <hr>
+    <h3>Update flight</h3>
     <form action="" method="post" class="form" role="form">
         {{ form.csrf_token }}
         {{ wtf.form_field(form.number) }}
@@ -14,7 +14,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label">{{ form.departure_date.label }}</label>
             <div class='input-group date' id='datetimepicker1'>
-                {{ form.departure_date(class_='form-control')|safe }}
+                {{ form.departure_date(class_='form-control' )|safe }}
                 <ul>
                     {% for error in form.departure_date.errors %}
                         <li style="color:red;">{{ error }}</li>
@@ -31,7 +31,7 @@
             <div class='input-group date' id='datetimepicker2'>
                 {{ form.arrival_date(class_='form-control')|safe }}
                 <ul>
-                    {% for error in form.departure_date.errors %}
+                    {% for error in form.arrival_date.errors %}
                         <li style="color:red;">{{ error }}</li>
                     {% endfor %}
                 </ul>
@@ -40,39 +40,7 @@
                 </span>
             </div>
         </div>
-
         {{ wtf.form_field(form.submit) }}
     </form>
-
-    <table class="table">
-        <tr>
-            <th>{{ form.number.label }}</th>
-            <th>{{ form.ship.label }}</th>
-            <th>{{ form.port_departure.label }}</th>
-            <th>{{ form.port_arrival.label }}</th>
-            <th>{{ form.departure_date.label }}</th>
-            <th>{{ form.arrival_date.label }}</th>
-        </tr>
-        <br>
-        {% for flight in flights %}
-            <tr>
-                <td>{{ flight.number }}</td>
-                <td>{{ flight.ship.name }}</td>
-                <td>{{ flight.port_departure.name }}</td>
-                <td>{{ flight.port_arrival.name }}</td>
-                <td>{{ flight.departure_date }}</td>
-                <td>{{ flight.arrival_date }}</td>
-                <td>
-                    <a href="/update_flight/{{ flight.id }}" class="btn btn-xs btn-default" id="mark_done">
-                        {{ icon('edit') }} Редагувати
-                    </a>
-                </td>
-                <td>
-                    <a href="/delete_flight/{{ flight.id }}" class="btn btn-xs btn-default" id="mark_done">
-                        {{ icon('remove') }} Видалити
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
 {% endblock %}
+

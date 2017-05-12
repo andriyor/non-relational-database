@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField, DateTimeField, IntegerField
 from wtforms.validators import DataRequired
 
 
 class PortForm(FlaskForm):
-    port_name = StringField('Назва порту', validators=[DataRequired()])
+    name = StringField('Назва порту', validators=[DataRequired()])
     submit = SubmitField()
 
 
@@ -21,5 +21,27 @@ class ContainerForm(FlaskForm):
 
 
 class ConsigneeForm(FlaskForm):
-    consignee_name = StringField('Вантажоодержувач', validators=[DataRequired()])
+    name = StringField('Вантажоодержувач', validators=[DataRequired()])
+    submit = SubmitField()
+
+
+class FlightForm(FlaskForm):
+    number = IntegerField('Номер Рейсу')
+    ship = SelectField('Cудно', choices=[])
+    port_departure = SelectField('Порт відправлення', choices=[])
+    port_arrival = SelectField('Порт прибуття', choices=[])
+    departure_date = DateTimeField('Departure Date', format='%d.%m.%Y %H:%M')
+    arrival_date = DateTimeField('Arrival Date', format='%d.%m.%Y %H:%M')
+    submit = SubmitField()
+
+
+class InvoiceForm(FlaskForm):
+    container = SelectField('Контейнер', choices=[])
+    flight = SelectField('Номер рейсу', choices=[])
+    consignee = SelectField('Вантажоодержувач', choices=[])
+    submit = SubmitField()
+
+
+class FindShipForm(FlaskForm):
+    container_product_description = StringField()
     submit = SubmitField()

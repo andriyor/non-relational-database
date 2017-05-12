@@ -3,32 +3,31 @@
 
 
 {% block page_content %}
-    <form method="POST" action="/add_invoice">
-        <div class="form-group">
-            <label for="sel1">Оберіть контейнер</label>
-            <select class="form-control" id="sel1" name="container_id">
-                {%- for container in containers %}
-                    <option value={{ container.id }}>{{ container.product_description }}</option>
-                {%- endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="sel1">Оберіть рейс</label>
-            <select class="form-control" id="sel1" name="flight_id">
-                {%- for flight in flights %}
-                    <option value={{ flight.id }}>{{ loop.index }}</option>
-                {%- endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="sel1">Оберіть вантажоодержувача</label>
-            <select class="form-control" id="sel1" name="consignee_id">
-                {%- for consignee in consignees %}
-                    <option value={{ consignee.id }}>{{ consignee.consignee_name }}</option>
-                {%- endfor %}
-            </select>
-        </div>
-        <button type="submit">Отправить</button>
-    </form>
+    {{ wtf.quick_form(form) }}
 
+    <table class="table">
+        <tr>
+            <th>{{ form.container.label }}</th>
+            <th>{{ form.flight.label }}</th>
+            <th>{{ form.consignee.label }}</th>
+        </tr>
+        <br>
+        {% for invoice in invoices %}
+            <tr>
+                <td>{{ invoice.container.product_description }}</td>
+                <td>{{ invoice.flight }}</td>
+                <td>{{ invoice.consignee.name }}</td>
+                <td>
+                    <a href="/update_invoice/{{ invoice.id }}" class="btn btn-xs btn-default" id="mark_done">
+                        {{ icon('edit') }} Редагувати
+                    </a>
+                </td>
+                <td>
+                    <a href="/delete_invoice/{{ invoice.id }}" class="btn btn-xs btn-default" id="mark_done">
+                        {{ icon('remove') }} Видалити
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

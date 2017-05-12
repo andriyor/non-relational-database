@@ -1,14 +1,15 @@
 from flask_mongoengine import MongoEngine
-from .app import app
+from lab_3.app import app
+from datetime import datetime
 db = MongoEngine(app)
 
 
 class Port(db.Document):
-    port_name = db.StringField()
+    name = db.StringField(unique=True)
 
 
 class Ship(db.Document):
-    name = db.StringField()
+    name = db.StringField(unique=True)
     type = db.StringField()
 
 
@@ -18,10 +19,11 @@ class Container(db.Document):
 
 
 class Consignee(db.Document):
-    consignee_name = db.StringField()
+    name = db.StringField(unique=True)
 
 
 class Flight(db.Document):
+    number = db.IntField()
     ship = db.ReferenceField(Ship)
     port_departure = db.ReferenceField(Port)
     port_arrival = db.ReferenceField(Port)

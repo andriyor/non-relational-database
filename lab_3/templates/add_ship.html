@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+    {{ wtf.quick_form(form) }}
+
+    <table class="table">
+        <tr>
+            <th>{{ form.name.label }}</th>
+            <th>{{ form.type.label }}</th>
+        </tr>
+        <br>
+        {% for ship in ships %}
+            <tr>
+                <td>{{ ship.name }}</td>
+                <td>{{ ship.type }}</td>
+                <td>
+                    <a href="/update_ship/{{ ship.id }}" class="btn btn-xs btn-default" id="mark_done">
+                        {{ icon('edit') }} Редагувати
+                    </a>
+                </td>
+                <td>
+                    <a href="/delete_ship/{{ ship.id }}" class="btn btn-xs btn-default" id="mark_done">
+                        {{ icon('remove') }} Видалити
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

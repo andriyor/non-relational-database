@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <hr>
+    <h3>Update container</h3>
+    <form action="" method="post" class="form" role="form">
+        {{ form.csrf_token }}
+        {{ wtf.form_field(form.product_description, value=container.product_description) }}
+        {{ wtf.form_field(form.discharge_rules, value=container.discharge_rules) }}
+        {{ wtf.form_field(form.submit) }}
+    </form>
+{% endblock %}
+
